@@ -1,13 +1,29 @@
-public class Utils {
+
+public Class Utils {
   
-  protected void defineWait(WebDriver driver, int time) {    
-    WebDriverWait waitTime = new WebDriverWait(driver, (long) time);
+  public void waitUntilPageReady() {   
+    StopWatch timeOut = new StopWatch();   
+    timeOut.start();   
+    while (timeOut.getTime() <= this.timeOutDefault) {    
+      if (this.javaScriptExecutor.executeScript("return document.readyState", new Object[0]).toString().equals("complete")) {     
+        timeOut.stop();        
+        break;      
+      }  
+    }
   }
   
+  protected WebElement waitForElement(By locator) {    
+    this.waitUntilPageReady();    
+    DriverFactory.setWait.until(ExpectedConditions.presenceOfElementLocated(locator));    
+    WebElement element = this.driver.findElement(locator);    
+    this.wait.until(ExpectedConditions.elementToBeClickable(element));    
+    return element;
+  }
+ 
   protected boolean waitTheTimeForBy(By locator, int time) {    
     WebDriverWait waitTime = new WebDriverWait(driver, (long) time);
     try {        
-      waitTime.until(ExpectedConditions.visibilityOfElementLocated(locator));        
+      DriverFactory.setWait.until(ExpectedConditions.visibilityOfElementLocated(locator));        
       return true; 
     } catch (Exception var4) {        
       return false;    
@@ -27,10 +43,22 @@ public class Utils {
   protected boolean returnIfElementIsVisible(By locator) {  
     WebDriverWait waitTime = new WebDriverWait(DriverFactory.getDriver(driver), time);    
     try {       
-      waitTime.until(ExpectedConditions.visibilityOfElementLocated(locator));        
+      DriverFactory.setWait.until(ExpectedConditions.visibilityOfElementLocated(locator));        
       result = true;  // Elemento foi encontrado
     } catch (Exception var4) {        
       result = false;  // Elemento NÃO foi encontrado 
     }
   }
+  
+  protected void click(By locator) {    
+      WebElement element = null;   
+      try {           
+        element = waitTheTimeForBy(locator);           
+        element.click();           
+        return;     
+      } catch (ElementClickInterceptedException | StaleElementReferenceException var6) {     
+      } catch (WebDriverException var7) {   
+      }  
+  }
+  
 }
