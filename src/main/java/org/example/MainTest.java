@@ -1,5 +1,6 @@
 package org.example;
 
+import org.junit.Test;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 
@@ -9,7 +10,8 @@ public class MainTest {
     static WebDriver driver;
     public static Dimension newDimension = new Dimension(1300, 800);
 
-    public static void main(String[] args) throws InterruptedException {
+    @Test
+    public void initTest() throws InterruptedException {
         driver = DriverFactory.getDriver("chrome");
         driver.get("https://www.google.com");
     }
