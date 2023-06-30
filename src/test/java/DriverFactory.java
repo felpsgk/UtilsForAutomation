@@ -1,6 +1,8 @@
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -10,7 +12,6 @@ import java.util.Map;
 
 public class DriverFactory {
     public static WebDriverWait wait;
-    public static Duration duration = Duration.ofSeconds(20);
     private static Map<String, WebDriver> webDriverMap = new HashMap<>();
     public static Dimension newDimension = new Dimension(1400, 800);
 
@@ -21,18 +22,27 @@ public class DriverFactory {
                 System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Java\\chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--headless");
+                options.addArguments("disable-infobars"); // disabling infobars
+                options.addArguments("--disable-extensions"); // disabling extensions
+                options.addArguments("--disable-gpu"); // applicable to windows os only
+                options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+                options.addArguments("--no-sandbox"); // Bypass OS security model
+                options.addArguments("user-data-dir=C:\\teste\\Profileteste\\Default");
+                //options.addArguments("profile-directory=C:\\teste");
                 driver = new ChromeDriver(options);
                 driver.manage().window().setSize(newDimension);
                 wait = new WebDriverWait(driver, 20);
                 break;
-//            case "firefox":
-//                driver = new FirefoxDriver();
-//                wait =  new WebDriverWait(driver, duration);
-//                break;
-//            case "ie":
-//                driver = new InternetExplorerDriver();
-//                wait =  new WebDriverWait(driver, duration);
-//                break;
+            case "firefox":
+                driver = new FirefoxDriver();
+                driver.manage().window().setSize(newDimension);
+                wait = new WebDriverWait(driver, 20);
+                break;
+            case "ie":
+                driver = new InternetExplorerDriver();
+                driver.manage().window().setSize(newDimension);
+                wait = new WebDriverWait(driver, 20);
+                break;
             default:
                 throw new IllegalArgumentException("Esse browser não existe");
         }
