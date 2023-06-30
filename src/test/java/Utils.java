@@ -47,6 +47,10 @@ public class Utils {
         element = waitForElement(botao);
         element.click();
     }
+  public void waitAtime(int tempoEmSegundos) throws InterruptedException {
+        int tempoEspera = tempoEmSegundos*1000;
+        Thread.sleep(tempoEspera);
+    }
 
     public void botao(String botão) {
         //button[contains(text(),'Entrar')]

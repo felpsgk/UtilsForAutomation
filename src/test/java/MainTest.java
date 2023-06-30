@@ -21,15 +21,15 @@ public class MainTest {
             utils.clearAndSendKeys(campoSenha,"84141398aB");
             utils.clicaBy(entrar);
         }
-        Thread.sleep(700);
+        utils.waitAtime(1);
         utils.clicaTexto("Utilizar essa localização");
         System.out.println("CLICOU LOCALIZAÇÃO");
-        Thread.sleep(700);
+        utils.waitAtime(1);
         utils.clicaBy(batePonto);
-        System.out.println("BATEU PONTO");
-        Thread.sleep(700);
+        System.out.println("BATEU PONTO -- ESPERANDO REGISTRAR O PONTO");
+        utils.waitAtime(1);
         utils.screenshot();
-        Thread.sleep(700);
+        utils.waitAtime(2);
         System.out.println("TIROU FOTO");
         driver.quit();
     }
