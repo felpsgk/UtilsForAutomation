@@ -2,6 +2,7 @@ import org.junit.Test;
 import org.openqa.selenium.*;
 import java.io.IOException;
 public class MainTest {
+    //teste
     static WebDriver driver;
     static Utils utils;
     By campoEmail = By.xpath("//div[contains(@class,'inside')]//input[contains(@placeholder,'e-mail')]");
