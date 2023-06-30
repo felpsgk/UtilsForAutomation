@@ -24,7 +24,7 @@ public class MainTest {
         Thread.sleep(1000);
         utils.clicaTexto("Utilizar essa localização");
         System.out.println("CLICOU LOCALIZAÇÃO");
-        utils.clicaBy(batePonto);
+        //utils.clicaBy(batePonto);
         System.out.println("BATEU PONTO");
         Thread.sleep(500);
         utils.screenshot();
