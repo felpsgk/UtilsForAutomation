@@ -27,7 +27,7 @@ public class MainTest {
         utils.waitAtime(1);
         utils.clicaBy(batePonto);
         System.out.println("BATEU PONTO -- ESPERANDO REGISTRAR O PONTO");
-        utils.waitAtime(1);
+        utils.waitAtime(5);
         utils.screenshot();
         utils.waitAtime(2);
         System.out.println("TIROU FOTO");
