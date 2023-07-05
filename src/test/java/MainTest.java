@@ -40,8 +40,21 @@ public class MainTest {
             System.out.println("dentro de meio dia, vai esperar 2 segundos");
             utils.waitAtime(2);
         }
-        utils.clicaTexto("Utilizar essa localização");
+        if (utils.returnIfElementExistsByTime(By.xpath("//*[contains(text(),'Utilizar a localização do meu último registro')]"),5)){
+            utils.clicaTexto("Utilizar a localização do meu último registro");
+        } else if (utils.returnIfElementExistsByTime(By.xpath("//*[contains(text(),'Utilizar essa localização')]"),5)){
+            utils.clicaTexto("Utilizar essa localização");
+        } else {
+            driver.get("https://app2.pontomais.com.br/registrar-ponto");
+            utils.waitAtime(2);
+            if (utils.returnIfElementExistsByTime(By.xpath("//*[contains(text(),'Utilizar a localização do meu último registro')]"),7)){
+                utils.clicaTexto("Utilizar a localização do meu último registro");
+            } else if (utils.returnIfElementExistsByTime(By.xpath("//*[contains(text(),'Utilizar essa localização')]"),7)){
+                utils.clicaTexto("Utilizar essa localização");
+            }
+        }
         System.out.println("CLICOU LOCALIZAÇÃO");
+        utils.waitAtime(1);
         utils.clicaBy(batePonto);
         System.out.println("BATEU PONTO -- ESPERANDO REGISTRAR O PONTO");
         utils.waitAtime(10);
