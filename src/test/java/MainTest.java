@@ -27,12 +27,9 @@ public class MainTest {
             utils.clicaBy(entrar);
         }
         utils.waitAtime(1);
-        utils.clicaTexto("Utilizar essa localização");
-        System.out.println("CLICOU LOCALIZAÇÃO");
 
         int[] values = {60, 120, 180, 240, 300};
         LocalTime currentTime = LocalTime.now();
-
         if (currentTime.isBefore(LocalTime.of(11, 0)) || currentTime.isAfter(LocalTime.of(15, 0))) {
             Random random = new Random();
             int index = random.nextInt(values.length);
@@ -41,9 +38,11 @@ public class MainTest {
             utils.waitAtime(randomValue);
         } else {
             System.out.println("dentro de meio dia, vai esperar 3 segundos");
-            utils.waitAtime(3);
+            utils.clicaTexto("Utilizar essa localização");
         }
 
+        utils.clicaTexto("Utilizar essa localização");
+        System.out.println("CLICOU LOCALIZAÇÃO");
         utils.clicaBy(batePonto);
         System.out.println("BATEU PONTO -- ESPERANDO REGISTRAR O PONTO");
         utils.waitAtime(10);
