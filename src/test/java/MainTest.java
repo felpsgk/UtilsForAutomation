@@ -9,45 +9,40 @@ public class MainTest {
     //teste
     static WebDriver driver;
     static Utils utils;
-    By campoEmail = By.xpath("//div[contains(@class,'inside')]//input[contains(@placeholder,'e-mail')]");
-    By campoSenha = By.xpath("//div[contains(@class,'inside')]//input[contains(@type,'pass')]");
-    By entrar = By.xpath("//span[contains(text(),'Entrar')]");
-    By batePonto = By.xpath("(//span[contains(@class,'pm-button-content') and contains(text(),'Bater ponto')])[3]");
+    By campoEmail = By.xpath("//input[contains(@name,'username')]");
+    By campoSenha = By.xpath("//input[contains(@name,'password')]");
+    By entrar = By.xpath("//div[contains(text(),'Entrar')]");
+    By criar = By.xpath("//body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[7]/div[1]");
+    By upars = By.xpath("//button[contains(@class,'_acan _acap _acas')]");
+    By imagem = By.xpath("//input[@type='file']");
 
     @Test
     public void initTest() throws InterruptedException, IOException {
+        String senha = "496476700a";
         driver = DriverFactory.getDriver("chrome");
         utils = new Utils(driver);
-        driver.get("https://app2.pontomais.com.br/registrar-ponto");
+        driver.get("https://www.instagram.com/");
         System.out.println("ENTROU SITE");
-        if (utils.returnIfElementExistsByTime(campoEmail, 10)) {
+        if (utils.returnIfElementExistsByTime(campoEmail, 3)) {
             System.out.println("PRECISOU LOGAR");
-            utils.clearAndSendKeys(campoEmail, "felipe.machado@proversolucoes.com.br");
-            utils.clearAndSendKeys(campoSenha, "84141398aB");
+            utils.clearAndSendKeys(campoEmail,"tifelps");
+            utils.clearAndSendKeys(campoSenha,senha);
             utils.clicaBy(entrar);
         }
         utils.waitAtime(1);
+        utils.clicaBy(criar);
+        utils.clicaBy(upars);
+        WebElement chooseFile = driver.findElement(upars);
+        System.out.println("TENTANDO ENVIAR IMAGEM");
+        chooseFile.sendKeys("C:\\Users\\felps\\IdeaProjects\\UtilsForAutomation\\teste.png");
+        // Adicionar legenda (opcional)
+        WebElement captionInput = driver.findElement(By.xpath("//textarea[@aria-label='Legenda']"));
+        captionInput.sendKeys("Minha foto incrível!");
 
-        int[] values = {60, 120, 180, 240, 300};
-        LocalTime currentTime = LocalTime.now();
-        if (currentTime.isBefore(LocalTime.of(11, 0)) || currentTime.isAfter(LocalTime.of(15, 0))) {
-            Random random = new Random();
-            int index = random.nextInt(values.length);
-            int randomValue = values[index];
-            System.out.println("RANDOM VAI ESPERAR " + randomValue / 60 + " minutos");
-            utils.waitAtime(randomValue);
-        } else {
-            System.out.println("dentro de meio dia, vai esperar 2 segundos");
-            utils.waitAtime(2);
-        }
-        utils.clicaTexto("Utilizar essa localização");
-        System.out.println("CLICOU LOCALIZAÇÃO");
-        utils.clicaBy(batePonto);
-        System.out.println("BATEU PONTO -- ESPERANDO REGISTRAR O PONTO");
+        // Publicar a foto
+        WebElement postButton = driver.findElement(By.xpath("//button[contains(text(), 'Publicar')]"));
+        postButton.click();
         utils.waitAtime(10);
-        utils.screenshot();
-        utils.waitAtime(2);
-        System.out.println("TIROU FOTO");
         driver.quit();
     }
 }

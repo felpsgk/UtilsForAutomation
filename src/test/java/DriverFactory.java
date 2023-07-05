@@ -21,7 +21,7 @@ public class DriverFactory {
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Java\\chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("--headless");
+                //options.addArguments("--headless");
                 options.addArguments("disable-infobars"); // disabling infobars
                 options.addArguments("--disable-extensions"); // disabling extensions
                 options.addArguments("--disable-gpu"); // applicable to windows os only
