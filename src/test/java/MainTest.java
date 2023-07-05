@@ -37,10 +37,9 @@ public class MainTest {
             System.out.println("RANDOM VAI ESPERAR " + randomValue / 60 + " minutos");
             utils.waitAtime(randomValue);
         } else {
-            System.out.println("dentro de meio dia, vai esperar 3 segundos");
-            utils.clicaTexto("Utilizar essa localização");
+            System.out.println("dentro de meio dia, vai esperar 2 segundos");
+            utils.waitAtime(2);
         }
-
         utils.clicaTexto("Utilizar essa localização");
         System.out.println("CLICOU LOCALIZAÇÃO");
         utils.clicaBy(batePonto);
