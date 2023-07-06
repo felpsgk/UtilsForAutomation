@@ -28,39 +28,38 @@ public class MainTest {
         }
         utils.waitAtime(1);
 
-        int[] values = {60, 120, 180, 240, 300};
+        int[] values = {15, 25, 40, 50, 60};
         LocalTime currentTime = LocalTime.now();
         if (currentTime.isBefore(LocalTime.of(11, 0)) || currentTime.isAfter(LocalTime.of(15, 0))) {
             Random random = new Random();
             int index = random.nextInt(values.length);
             int randomValue = values[index];
-            System.out.println("RANDOM VAI ESPERAR " + randomValue / 60 + " minutos");
+            System.out.println("AGORA SÃO " + currentTime + " RANDOM VAI ESPERAR " + randomValue + " segundos");
             utils.waitAtime(randomValue);
+            utils.screenshot("_Espera_");
         } else {
             System.out.println("dentro de meio dia, vai esperar 2 segundos");
             utils.waitAtime(2);
+            utils.screenshot("_EsperaMeiDia_");
         }
-        if (utils.returnIfElementExistsByTime(By.xpath("//*[contains(text(),'Utilizar a localização do meu último registro')]"),5)){
+        driver.get("https://app2.pontomais.com.br/registrar-ponto");
+        utils.waitAtime(2);
+        utils.screenshot("_EsperaRefresh_");
+        if (utils.returnIfElementExistsByTime(By.xpath("//*[contains(text(),'Utilizar a localização do meu último registro')]"), 7)) {
             utils.clicaTexto("Utilizar a localização do meu último registro");
-        } else if (utils.returnIfElementExistsByTime(By.xpath("//*[contains(text(),'Utilizar essa localização')]"),5)){
+            utils.screenshot("_EsperaUltReg_");
+        } else if (utils.returnIfElementExistsByTime(By.xpath("//*[contains(text(),'Utilizar essa localização')]"), 7)) {
             utils.clicaTexto("Utilizar essa localização");
-        } else {
-            driver.get("https://app2.pontomais.com.br/registrar-ponto");
-            utils.waitAtime(2);
-            if (utils.returnIfElementExistsByTime(By.xpath("//*[contains(text(),'Utilizar a localização do meu último registro')]"),7)){
-                utils.clicaTexto("Utilizar a localização do meu último registro");
-            } else if (utils.returnIfElementExistsByTime(By.xpath("//*[contains(text(),'Utilizar essa localização')]"),7)){
-                utils.clicaTexto("Utilizar essa localização");
-            }
+            utils.screenshot("_EsperaUlt_");
         }
         System.out.println("CLICOU LOCALIZAÇÃO");
         utils.waitAtime(1);
         utils.clicaBy(batePonto);
         System.out.println("BATEU PONTO -- ESPERANDO REGISTRAR O PONTO");
         utils.waitAtime(10);
-        utils.screenshot();
+        utils.screenshot("_posPonto_");
         utils.waitAtime(2);
         System.out.println("TIROU FOTO");
         driver.quit();
-    }
+}
 }

@@ -24,20 +24,19 @@ public class Utils {
         element.click();
     }
 
-    public void screenshot() throws IOException {
+    public void screenshot(String fase) throws IOException {
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         LocalDateTime hoje = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss");
         String dt = hoje.format(formatter);
         // Now you can do whatever you need to do with it, for example copy somewhere
-        FileUtils.copyFile(scrFile, new File("c:\\tmp\\"+dt+"screenshot.png"));
+        FileUtils.copyFile(scrFile, new File("c:\\tmp\\"+dt+"screenshot"+fase+".png"));
     }
 
     public void clicaTexto(String botão) {
         //button[contains(text(),'Entrar')]
         WebElement element = null;
         elementoTexto = By.xpath("//*[contains(text(),'" + botão + "')]");
-        System.out.println(elementoTexto);
         element = waitForElement(elementoTexto);
         System.out.println("achou botão");
         element.click();
