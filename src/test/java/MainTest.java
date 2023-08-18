@@ -23,7 +23,7 @@ public class MainTest {
         if (utils.returnIfElementExistsByTime(campoEmail, 10)) {
             System.out.println("PRECISOU LOGAR");
             utils.clearAndSendKeys(campoEmail, "felipe.machado@proversolucoes.com.br");
-            utils.clearAndSendKeys(campoSenha, "84141398aB");
+            utils.clearAndSendKeys(campoSenha, "976431852gk@");
             utils.clicaBy(entrar);
         }
         utils.waitAtime(1);
