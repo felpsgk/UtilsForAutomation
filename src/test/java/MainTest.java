@@ -27,6 +27,7 @@ public class MainTest {
             utils.clicaBy(entrar);
         }
         utils.waitAtime(1);
+        //timing
         int[] values = {15, 25, 35, 45, 50};
         LocalTime currentTime = LocalTime.now();
         if (currentTime.isBefore(LocalTime.of(11, 0)) || currentTime.isAfter(LocalTime.of(15, 0))) {
