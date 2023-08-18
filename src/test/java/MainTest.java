@@ -27,8 +27,7 @@ public class MainTest {
             utils.clicaBy(entrar);
         }
         utils.waitAtime(1);
-
-        int[] values = {15, 25, 40, 50, 60};
+        int[] values = {15, 25, 35, 45, 50};
         LocalTime currentTime = LocalTime.now();
         if (currentTime.isBefore(LocalTime.of(11, 0)) || currentTime.isAfter(LocalTime.of(15, 0))) {
             Random random = new Random();
@@ -42,15 +41,15 @@ public class MainTest {
             utils.waitAtime(2);
             utils.screenshot("_EsperaMeiDia_");
         }
-        driver.get("https://app2.pontomais.com.br/registrar-ponto");
-        utils.waitAtime(2);
-        utils.screenshot("_EsperaRefresh_");
-        if (utils.returnIfElementExistsByTime(By.xpath("//*[contains(text(),'Utilizar a localização do meu último registro')]"), 7)) {
-            utils.clicaTexto("Utilizar a localização do meu último registro");
-            utils.screenshot("_EsperaUltReg_");
-        } else if (utils.returnIfElementExistsByTime(By.xpath("//*[contains(text(),'Utilizar essa localização')]"), 7)) {
+        if (utils.returnIfElementExistsByTime(By.xpath("//*[contains(text(),'Utilizar essa localização')]"), 5)) {
             utils.clicaTexto("Utilizar essa localização");
+            utils.screenshot("_EsperaEssaLocaliz_");
+        } else if (utils.returnIfElementExistsByTime(By.xpath("//*[contains(text(),'Sua localização expirou!')]"), 5)) {
+            driver.get("https://app2.pontomais.com.br/registrar-ponto");
             utils.screenshot("_EsperaUlt_");
+        } else if (utils.returnIfElementExistsByTime(By.xpath("//*[contains(text(),'Utilizar essa localização')]"), 5)) {
+            utils.clicaTexto("Utilizar essa localização");
+            utils.screenshot("_EsperaEssaLocalizRefresh_");
         }
         System.out.println("CLICOU LOCALIZAÇÃO");
         utils.waitAtime(1);
